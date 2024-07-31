@@ -140,8 +140,23 @@ class LinkedList {
 
   reverse() {
     const prevTail = this.tail;
-    this.tail = this.head;
-    console.log("reverse", this, { prevTail });
+    this.tail = { ...this.head };
+    const length = this.length;
+
+    // let tempHead = { ...this.head };
+    // this.head = null;
+    this.tail.next = null;
+    let reverseList;
+
+    for (let i = 0; i < length; i++) {
+      const node = this.pop();
+      if (!reverseList) {
+        reverseList = new LinkedList(node.value);
+      }else
+      reverseList.push(node.value)
+    }
+    // console.log("reverse", this, { prevTail });
+    return reverseList;
   }
 }
 
@@ -152,12 +167,13 @@ function test() {
   myLinkedList.push(20);
   myLinkedList.push(30);
   myLinkedList.push(40);
+  myLinkedList.push(50);
   // myLinkedList.pop();
   // myLinkedList.insert(2, 111);
   // myLinkedList.get(3);
   // myLinkedList.unshift(111);
   // myLinkedList.shift();
-  myLinkedList.reverse();
+  // myLinkedList.reverse();
   console.log("\nLinked List:");
   // myLinkedList.printList();
   console.log(myLinkedList);
